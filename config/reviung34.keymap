@@ -98,8 +98,7 @@
 #define M_MC   &kp C_AC_DESKTOP_SHOW_ALL_WINDOWS
 
 // stupid workaround for win remote desktop keyboard hook
-#define SHIFTED(sym, macro_label) rdp_s##sym: rdp_s##sym {\
-    label = macro_label;\
+#define SHIFTED(sym) rdp_s##sym: rdp_s##sym {\
     compatible = "zmk,behavior-macro";\
     wait-ms = <35>;\
     #binding-cells = <0>;\
@@ -112,8 +111,7 @@
         ;\
 }
 
-#define RALTED(sym, macro_label) rdp_a##sym: rdp_a##sym {\
-    label = macro_label;\
+#define RALTED(sym) rdp_a##sym: rdp_a##sym {\
     compatible = "zmk,behavior-macro";\
     wait-ms = <35>;\
     #binding-cells = <0>;\
@@ -134,38 +132,38 @@
 
     macros {
 
-        SHIFTED(_DEG,  "shifted_dex");
-        SHIFTED(_EXLM, "shifted_exlm");
-        SHIFTED(_DQUO, "shifted_dquo");
-        SHIFTED(_SECT, "shifted_sect");
-        SHIFTED(_DLR,  "shifted_dlr");
-        SHIFTED(_AMPR, "shifted_ampr");
-        SHIFTED(_SLSH, "shifted_slsh");
-        SHIFTED(_LPRN, "shifted_lprn");
-        SHIFTED(_RPRN, "shifted_rprn");
-        SHIFTED(_EQL,  "shifted_eql");
-        SHIFTED(_QUES, "shifted_ques");
-        SHIFTED(_PERC, "shifted_perc");
-        SHIFTED(_GRV,  "shifted_grv");
-        SHIFTED(_RABK, "shifted_rabk");
-        SHIFTED(_SCLN, "shifted_scln");
-        SHIFTED(_COLN, "shifted_coln");
-        SHIFTED(_UNDS, "shifted_unds");
-        SHIFTED(_ASTR, "shifted_astr");
-        SHIFTED(_QUOT, "shifted_quot");
+        SHIFTED(_DEG);
+        SHIFTED(_EXLM);
+        SHIFTED(_DQUO);
+        SHIFTED(_SECT);
+        SHIFTED(_DLR);
+        SHIFTED(_AMPR);
+        SHIFTED(_SLSH);
+        SHIFTED(_LPRN);
+        SHIFTED(_RPRN);
+        SHIFTED(_EQL);
+        SHIFTED(_QUES);
+        SHIFTED(_PERC);
+        SHIFTED(_GRV);
+        SHIFTED(_RABK);
+        SHIFTED(_SCLN);
+        SHIFTED(_COLN);
+        SHIFTED(_UNDS);
+        SHIFTED(_ASTR);
+        SHIFTED(_QUOT);
 
-        RALTED(_SUP2, "ralted_sup2");
-        RALTED(_SUP3, "ralted_sup3");
-        RALTED(_LCBR, "ralted_lcbr");
-        RALTED(_LBRC, "ralted_lbrc");
-        RALTED(_RBRC, "ralted_rbrc");
-        RALTED(_RCBR, "ralted_rcbr");
-        RALTED(_BSLS, "ralted_bsls");
-        RALTED(_AT,   "ralted_at");
-        RALTED(_EURO, "ralted_euro");
-        RALTED(_TILD, "ralted_tild");
-        RALTED(_PIPE, "ralted_pipe");
-        RALTED(_MICR, "ralted_micr");
+        RALTED(_SUP2);
+        RALTED(_SUP3);
+        RALTED(_LCBR);
+        RALTED(_LBRC);
+        RALTED(_RBRC);
+        RALTED(_RCBR);
+        RALTED(_BSLS);
+        RALTED(_AT);
+        RALTED(_EURO);
+        RALTED(_TILD);
+        RALTED(_PIPE);
+        RALTED(_MICR);
 
         ZMK_MACRO(go_src,
             wait-ms = <30>;
@@ -348,7 +346,6 @@
     behaviors {
         hm: homerow_mods {
                     compatible = "zmk,behavior-hold-tap";
-                    label = "HOMEROW_MODS";
                     #binding-cells = <2>;
                     tapping-term-ms = <180>;
                     quick-tap-ms = <0>;
