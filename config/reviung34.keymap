@@ -37,25 +37,35 @@
 #define G_FN    16
 #define G_SET   17
 
-// Global
-#define MDA     18
-#define RDP_SYM 19
+// Stupid workaround for VMWare Horizon Client on MacBook
+#define H_DEF   18
+#define H_NAV   19
+#define H_SYM   20
+#define H_NUM   21
+#define H_FN    22
+#define H_SET   23
 
+// Global
+#define MDA     24
+#define SPCL     25
 
 // Special shortcuts
 #define ________     &trans
 #define TODO         &trans
 #define DEL_W        &kp LC(BSPC)
-#define SPACE_SYM    &lt RDP_SYM SPACE
+#define SPACE_SYM    &lt SYM SPACE
 #define SPACE_M_SYM  &lt M_SYM SPACE
 #define SPACE_G_SYM  &lt G_SYM SPACE
+#define SPACE_H_SYM  &lt H_SYM SPACE
 #define J_MDA        &lt MDA J
 #define C_NAV        &lt NAV C
 #define C_M_NAV      &lt M_NAV C
 #define C_G_NAV      &lt G_NAV C
+#define C_H_NAV      &lt H_NAV C
 #define Y_NUM        &lt NUM Z
 #define Y_M_NUM      &lt M_NUM Z
 #define Y_G_NUM      &lt G_NUM Z
+#define Y_H_NUM      &lt H_NUM Z
 #define BSPC_LGUI    &hm LGUI BSPC
 
 #define BT_1       &bt BT_SEL 0
@@ -103,33 +113,6 @@
 //#define M_SRCH   &kp LG(SPACE)
 #define M_MC   &kp C_AC_DESKTOP_SHOW_ALL_WINDOWS
 
-// stupid workaround for win remote desktop keyboard hook
-#define SHIFTED(sym) rdp_s##sym: rdp_s##sym {\
-    compatible = "zmk,behavior-macro";\
-    wait-ms = <35>;\
-    #binding-cells = <0>;\
-    bindings\
-        = <&macro_press &kp LSHFT>\
-        , <&macro_press &kp sym>\
-        , <&macro_release &kp LSHFT>\
-        , <&macro_pause_for_release>\
-        , <&macro_release &kp sym>\
-        ;\
-}
-
-#define RALTED(sym) rdp_a##sym: rdp_a##sym {\
-    compatible = "zmk,behavior-macro";\
-    wait-ms = <35>;\
-    #binding-cells = <0>;\
-    bindings\
-        = <&macro_press &kp RALT>\
-        , <&macro_press &kp sym>\
-        , <&macro_release &kp RALT>\
-        , <&macro_pause_for_release>\
-        , <&macro_release &kp sym>\
-        ;\
-}
-
 &sk {
         release-after-ms = <3000>;
 };
@@ -137,39 +120,6 @@
 / {
 
     macros {
-
-        SHIFTED(_DEG);
-        SHIFTED(_EXLM);
-        SHIFTED(_DQUO);
-        SHIFTED(_SECT);
-        SHIFTED(_DLR);
-        SHIFTED(_AMPR);
-        SHIFTED(_SLSH);
-        SHIFTED(_LPRN);
-        SHIFTED(_RPRN);
-        SHIFTED(_EQL);
-        SHIFTED(_QUES);
-        SHIFTED(_PERC);
-        SHIFTED(_GRV);
-        SHIFTED(_RABK);
-        SHIFTED(_SCLN);
-        SHIFTED(_COLN);
-        SHIFTED(_UNDS);
-        SHIFTED(_ASTR);
-        SHIFTED(_QUOT);
-
-        RALTED(_SUP2);
-        RALTED(_SUP3);
-        RALTED(_LCBR);
-        RALTED(_LBRC);
-        RALTED(_RBRC);
-        RALTED(_RCBR);
-        RALTED(_BSLS);
-        RALTED(_AT);
-        RALTED(_EURO);
-        RALTED(_TILD);
-        RALTED(_PIPE);
-        RALTED(_MICR);
 
         ZMK_MACRO(go_src,
             wait-ms = <30>;
@@ -251,7 +201,7 @@
                 , <&macro_release &kp LSHFT>
                 , <&macro_release &kp LGUI>
                 , <&macro_release &kp LALT>
-                , <&macro_tap  &to DEF>
+                , <&macro_tap  &to H_DEF>
                 , <&macro_press   &kp LWIN>
                 , <&macro_press   &kp LCTL>
                 , <&macro_tap     &kp LEFT>
@@ -281,7 +231,7 @@
             tap-ms = <40>;
             bindings
                 = <&macro_tap  BT_2>
-                , <&macro_tap    &to DEF>
+                , <&macro_tap    &to H_DEF>
                 , <&macro_press   &kp LWIN>
                 , <&macro_press   &kp LCTL>
                 , <&macro_tap     &kp RIGHT>
@@ -290,7 +240,7 @@
                 ;
         )
 
-        ZMK_MACRO(to_go3,
+        ZMK_MACRO(to_go4,
             wait-ms = <30>;
             tap-ms = <40>;
             bindings
@@ -308,7 +258,32 @@
                 ;
         )
 
+        ZMK_MACRO(m_spec,
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings
+                = <&macro_tap &kp DE_AT &kp M &kp E &kp DOT &kp C &kp O &kp M>
+                ;
+        )
+
+        ZMK_MACRO(mas_spec,
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings
+                = <&macro_tap &kp DE_AT &kp I &kp C &kp L &kp O &kp U &kp D &kp DOT &kp C &kp O &kp M>
+                ;
+        )
+        
+        ZMK_MACRO(maz_spec,
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings
+                = <&macro_tap &kp DE_AT &kp G &kp M &kp A &kp I &kp L &kp DOT &kp C &kp O &kp M>
+                ;
+        )
+
     };
+
 
     combos {
         compatible = "zmk,combos";
@@ -367,10 +342,10 @@
 
         nav_layer {
             bindings = <
-            	&kp ESC   &lck        &run       &go_src    ________             &kp PG_UP  &kp HOME  &kp UP    &kp END    &kp DE_Y
-            	________  ________    ________   ________   ________             &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp RET
-            	&kp LSHFT ________    ________   ________   ________             ________   ________  ________  ________   &kp DE_SS
-            	                                 ________   ________             ________   &kp DEL
+            	&kp ESC   &lck       &run       &go_src    ________             &kp PG_UP  &kp HOME  &kp UP    &kp END    &kp DE_Y
+            	________  &mo SPCL   ________   ________   ________             &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp RET
+            	&kp LSHFT ________   ________   ________   ________             ________   ________  ________  ________   &kp DE_SS
+            	                                ________   ________             ________   &kp DEL
    			>;
         };
 
@@ -383,7 +358,7 @@
         //                   | --- | --- |       | --- | --- |
         	bindings = <
                &kp DE_CIRC  &kp DE_UNDS  &kp DE_LCBR  &kp DE_RCBR  &kp DE_SECT          &kp DE_EXLM  &kp DE_LABK  &kp DE_RABK  &kp DE_EQL   &kp DE_AMPR
-               &kp DE_BSLS  &kp DE_SLSH  &kp DE_LPRN  &kp RPRN     &kp DE_ASTR          &kp DE_QUES  &kp DE_LBRC  &kp DE_RBRC  &kp DE_MINS  &kp DE_COLN
+               &kp DE_BSLS  &kp DE_SLSH  &kp DE_LPRN  &kp DE_RPRN  &kp DE_ASTR          &kp DE_QUES  &kp DE_LBRC  &kp DE_RBRC  &kp DE_MINS  &kp DE_COLN
                &kp DE_ACUT  &kp DE_DLR   &kp DE_PIPE  &kp DE_TILD  &kp DE_HASH          &kp DE_PLUS  &kp DE_PERC  &kp DE_DQUO  &kp DE_QUOT  &kp DE_SCLN
         	                                            &kp DE_AT    ________             ________     ________
         	>;
@@ -413,7 +388,7 @@
         settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
-                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd    &to_go3    BT_6       ________
+                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd    &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9   &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
             >;
@@ -436,7 +411,7 @@
         mac_nav_layer {
             bindings = <
             	&kp ESC   &lck_mac   &run       &go_src    ________             M_PUP    M_HME      &kp UP    M_END      &kp DE_Y
-            	________  ________   ________   ________   ________             M_PDWN   &kp LEFT   &kp DOWN  &kp RIGHT  &kp RET
+            	________  &mo SPCL   ________   ________   ________             M_PDWN   &kp LEFT   &kp DOWN  &kp RIGHT  &kp RET
             	&kp LSHFT ________   ________   ________   ________             ________  ________  ________  ________   &kp DE_SS
             	                                ________   ________             ________  &kp DEL
    			>;
@@ -450,10 +425,10 @@
         // |  `  |  $  |  |  |  ~  |  #  |       |  +  |  %  |  "  |  '  |  ;  |
         //                   | --- | --- |       | --- | --- |
         	bindings = <
-                &kp DE_LABK  &kp DE_UNDS  &kp DE_LCBR     &kp DE_RCBR  &kp LS(N3)           &kp DE_EXLM  &kp DE_CIRC  &kp LS(DE_CIRC)  &kp DE_EQL   &kp DE_AMPR
-                &kp DE_BSLS  &kp DE_SLSH  &kp DE_LPRN     &kp DE_RPRN  &kp DE_ASTR          &kp DE_QUES  &kp DE_LBRC  &kp DE_RBRC      &kp DE_MINS  &kp DE_COLN
-                &kp DE_ACUT  &kp DE_DLR   &kp LA(DE_CIRC) &kp DE_TILD  &kp DE_HASH          &kp DE_PLUS  &kp DE_PERC  &kp DE_DQUO      &kp DE_QUOT  &kp DE_SCLN
-        	                                                &kp DE_AT    ________             ________     ________
+                &kp DE_CIRC  &kp DE_UNDS  &kp DE_LCBR   &kp DE_RCBR  &kp DE_SECT          &kp DE_EXLM  &kp DE_LABK  &kp DE_RABK  &kp DE_EQL   &kp DE_AMPR
+                &kp DE_BSLS  &kp DE_SLSH  &kp DE_LPRN   &kp DE_RPRN  &kp DE_ASTR          &kp DE_QUES  &kp DE_LBRC  &kp DE_RBRC  &kp DE_MINS  &kp DE_COLN
+                &kp DE_ACUT  &kp DE_DLR   &kp DE_PIPE   &kp DE_TILD  &kp DE_HASH          &kp DE_PLUS  &kp DE_PERC  &kp DE_DQUO  &kp DE_QUOT  &kp DE_SCLN
+        	                                              &kp DE_AT    ________             ________     ________
         	>;
         };
 
@@ -481,7 +456,7 @@
         mac_settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
-                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go3    BT_6       ________
+                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9  &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
             >;
@@ -548,11 +523,81 @@
         game_settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
-                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go3    BT_6       ________
+                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9  &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
             >;
         };
+
+
+
+
+
+        hrz_default_layer {
+            bindings = <
+                J_MDA    &kp L  &kp U        &kp A        &kp Q                   &kp W        &kp B      &kp D      &kp G    &kp DE_Z
+                C_H_NAV  ALT_R  CTL_I        SFT_E        &kp O                   &kp M        SFT_N      CTL_T      RALT_S   LALT_H
+                GUI_V    &kp X  &kp DE_UDIA  &kp DE_ADIA  &kp DE_ODIA             &kp P        &kp F      &kp COMMA  &kp DOT  LGUI_K
+                                             Y_H_NUM      &kp LSHFT               SPACE_H_SYM  BSPC_LGUI 
+             >;
+        };
+
+
+        hrz_nav_layer {
+            bindings = <
+            	&kp ESC   &lck       &run       &go_src    ________             &kp PG_UP  &kp HOME  &kp UP    &kp END    &kp DE_Y
+            	________  &mo SPCL   ________   ________   ________             &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp RET
+            	&kp LSHFT ________   ________   ________   ________             ________   ________  ________  ________   &kp DE_SS
+            	                                ________   ________             ________   &kp DEL
+   			>;
+        };
+
+
+        hrz_sym_layer {
+        // ---------------------------------------------------------------------
+        // |  ^  |  _  |  {  |  }  |  §  |       |  !  |  <  |  >  |  =  |  &  |
+        // |  \  |  /  |  (  |  )  |  *  |       |  ?  |  [  |  ]  |  -  |  :  |
+        // |  `  |  $  |  |  |  ~  |  #  |       |  +  |  %  |  "  |  '  |  ;  |
+        //                   | --- | --- |       | --- | --- |
+        	bindings = <
+               &kp DE_CIRC  &kp DE_UNDS  &kp LA(N8)   &kp LA(N9)   &kp DE_SECT          &kp DE_EXLM  &kp DE_LABK  &kp DE_RABK  &kp DE_EQL   &kp DE_AMPR
+               &kp DE_BSLS  &kp DE_SLSH  &kp DE_LPRN  &kp DE_RPRN  &kp DE_ASTR          &kp DE_QUES  &kp RA(N5)   &kp RA(N6)   &kp DE_MINS  &kp DE_COLN
+               &kp EQUAL    &kp DE_DLR   &kp DE_PIPE  &kp DE_TILD  &kp DE_HASH          &kp DE_PLUS  &kp DE_PERC  &kp DE_DQUO  &kp DE_QUOT  &kp DE_SCLN
+        	                                            &kp DE_AT    ________             ________     ________
+        	>;
+        };
+
+
+        hrz_num_layer {
+            bindings = <
+                ________  ________  ________  &mo H_SET   ________         &kp DE_SLSH  &kp N7   &kp N8    &kp N9  &kp DE_MINS
+                &sk LGUI  &sk RALT  &sk LCTRL &sk LSHIFT  ________         &kp DE_ASTR  &kp N4   &kp N5    &kp N6  &kp DE_PLUS
+                &sk LALT  ________  ________  &mo H_FN    ________         &kp COMMA    &kp N1   &kp N2    &kp N3  &kp N0
+                                              ________    ________         &kp DE_COLN  &kp DOT
+            >;
+        };
+
+
+        hrz_fn_layer {
+            bindings = <
+                ________  ________  ________  ________  ________          ________  &kp F7  &kp F8  &kp F9  ________
+                ________  ________  ________  ________  ________          ________  &kp F4  &kp F5  &kp F6  ________
+                ________  ________  ________  ________  ________          ________  &kp F1  &kp F2  &kp F3  &kp F10
+                                              ________  ________          &kp F11   &kp F12
+            >;
+        };
+
+
+        hrz_settings_layer {
+            bindings = <
+                ________      ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
+                &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd    &to_go4    BT_6       ________
+                ________      ________      ________  ________  ________          ________  &to_sp9   &to_nca    &to_scd    &to_devvm
+                                                      ________  ________          ________  ________
+            >;
+        };
+
+
 
 
 
@@ -565,20 +610,16 @@
                                                         ________      ________          ________  ________
             >;
         };
-
-        sym_rdp_layer {
-        // ---------------------------------------------------------------------
-        // |  ^  |  _  |  {  |  }  |  §  |       |  !  |  <  |  >  |  =  |  &  |
-        // |  \  |  /  |  (  |  )  |  *  |       |  ?  |  [  |  ]  |  -  |  :  |
-        // |  `  |  $  |  |  |  ~  |  #  |       |  +  |  %  |  "  |  '  |  ;  |
-        //                   | --- | --- |       | --- | --- |
+        
+        special_layer {
             bindings = <
-                &kp DE_CIRC  &rdp_s_UNDS  &rdp_a_LCBR  &rdp_a_RCBR  &rdp_s_SECT          &rdp_s_EXLM  &kp DE_LABK  &rdp_s_RABK  &rdp_s_EQL   &rdp_s_AMPR
-                &rdp_a_BSLS  &rdp_s_SLSH  &rdp_s_LPRN  &rdp_s_RPRN  &rdp_s_ASTR          &rdp_s_QUES  &rdp_a_LBRC  &rdp_a_RBRC  &kp DE_MINS  &rdp_s_COLN
-                &kp DE_ACUT  &rdp_s_DLR   &rdp_a_PIPE  &rdp_a_TILD  &kp DE_HASH          &kp DE_PLUS  &rdp_s_PERC  &rdp_s_DQUO  &rdp_s_QUOT  &rdp_s_SCLN
-                                                       &rdp_a_AT    ________             ________     ________
+                ________  ________  ________  ________  &maz_spec         ________  ________  ________  ________  ________
+                ________  ________  ________  ________  &mas_spec         ________  ________  ________  ________  ________
+                ________  ________  ________  &m_spec   ________          ________  ________  ________  ________  ________
+                                              ________  ________          ________  ________
             >;
         };
+
 
      };
 };
