@@ -388,6 +388,7 @@
         settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
+                &soft_off     ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
                 &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd    &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9   &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
@@ -456,6 +457,7 @@
         mac_settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
+                &soft_off     ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
                 &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9  &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
@@ -523,6 +525,7 @@
         game_settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
+                &soft_off     ________      ________  ________  BT_CLEAR          ________  &to DEF  &to M_DEF  &to G_DEF  ________
                 &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd   &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9  &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
@@ -591,6 +594,7 @@
         hrz_settings_layer {
             bindings = <
                 ________      ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
+                &soft_off     ________      ________  ________  BT_CLEAR          ________  &to DEF   &to M_DEF  &to G_DEF  ________
                 &out OUT_USB  &out OUT_BLE  ________  ________  ________          ________  &to_sd    &to_go4    BT_6       ________
                 ________      ________      ________  ________  ________          ________  &to_sp9   &to_nca    &to_scd    &to_devvm
                                                       ________  ________          ________  ________
